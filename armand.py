@@ -10,3 +10,5 @@ def findQuarterbacksWithNuts(data):
 		if quarter[2] == M_NUT:
 			lst.append((quarter[0], quarter[1]))
 	return lst
+
+def haveFruit(data, )

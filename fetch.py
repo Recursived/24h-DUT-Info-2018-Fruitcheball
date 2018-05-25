@@ -2,7 +2,7 @@ from constants import *
 
 class Fetch(object):
 	""" Objet de conversion des données envoyées du serveur """
-	
+
 	def __init__(self, ident):
 		pass
 		
@@ -76,7 +76,7 @@ class Fetch(object):
 				else:
 					hold = int(coord[3])
 
-				self.data[D_TEAMS][player][T_PLAYERS][i] = [int(coord[1]), int(coord[2]), hold]
+				self.data[D_TEAMS][player][T_PLAYERS][i] = [int(coord[2]), int(coord[1]), hold]
 				i += 1
 
 			if not self.written:
