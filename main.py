@@ -6,7 +6,7 @@
 import sys
 from constants import *
 from network import *
-from format import *
+from fetch import *
 
 # Fonctions -------------------------------------------------------------------
 def main():
@@ -18,9 +18,14 @@ def main():
 		port = sys.argv[2]
 		connexion = Network(ip, port)
 	else:
-		connexion = Network
+		connexion = Network()
+
+	connexion.send("ascii_p<array>\n")
+	numero = connexion.receive()
+	dataFetching = Fetch(numero)
 
 	data = connexion.receive()
+	print(dataFetching.fetchMessage(data))
 
 
 if __name__ == '__main__':
