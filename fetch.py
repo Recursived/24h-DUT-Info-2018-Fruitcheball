@@ -5,7 +5,7 @@ class Fetch(object):
 	def __init__(self, size, ident):
 		pass
 		self.mat = [None for i in range(size)]
-		self.mat = [lst(self.mat) for i in range(size)]
+		self.mat = [list(self.mat) for i in range(size)]
 		self.data = dict()
 
 		self.data[D_MAP] = self.mat
@@ -22,15 +22,16 @@ class Fetch(object):
 
 	def fetchMessage(self, message):
 		lst = message.split("_")
-
+		for line in lst:
+			print(line)
 		self.data[D_NUM_TURN] = lst[0]
 
 		nb = lst[1]
 
-		grid = lst[2].split[","]
+		grid = lst[2].split(",")[1:]
 		i = 0
 		for line in grid:
-			cases = line.split("");
+			cases = list(line)
 			j = 0
 			for case in cases:
 				if case == "X":
@@ -46,6 +47,7 @@ class Fetch(object):
 			player = playerLine - 3
 			bigLine = lst[playerLine].split(",")
 
+			i = 0
 			for coord in range(2, 5):
 				coord = bigLine[coord].split(":")
 
@@ -53,9 +55,11 @@ class Fetch(object):
 					hold = P_EMPTY
 				else:
 					hold = int(coord[3])
-				self.data[D_TEAMS][player][T_PLAYERS] = [int(coord[1]), int(coord[2]), hold]
+				self.data[D_TEAMS][player][T_PLAYERS][i] = [int(coord[1]), int(coord[2]), hold]
+				i += 1
 
 			if self.data[D_TEAMS][player][T_ZONE] == None:
+				print("passing in zone")
 				coords = [0, 0, 0, 0, 0, 0]
 				i = 0
 				for coord in range(6, 9):
@@ -63,6 +67,7 @@ class Fetch(object):
 					coords[i] = int(coord[1])
 					coords[i+1] = int(coord[2])
 					i += 2
+				print(((coords[0], coords[1]), (coords[2], coords[3]), (coords[4], coords[5])))
 				self.data[D_TEAMS][player][T_ZONE] = ((coords[0], coords[1]), (coords[2], coords[3]), (coords[4], coords[5]))
 
 			self.data[D_TEAMS][player][T_SCORE] = int(bigLine[10])
