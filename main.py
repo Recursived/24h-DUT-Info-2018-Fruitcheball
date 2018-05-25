@@ -7,6 +7,7 @@ import sys
 from constants import *
 from network import *
 from fetch import *
+from choiceAlea import alea
 
 # Fonctions -------------------------------------------------------------------
 def main():
@@ -26,11 +27,11 @@ def main():
 
 	while 1:
 		received = connexion.receive()
-		if received == "FIN":
+		if received == "FIN\n":
 			break
 		data = dataFetching.fetchMessage(received)
 		
-		#~ message = choixIA()
+		message = alea()
 		connexion.send(message)
 
 
