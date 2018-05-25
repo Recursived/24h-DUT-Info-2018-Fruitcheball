@@ -1,4 +1,7 @@
 from constants import *
+from maneta import *
+from armand import *
+
 
 
 def choosePlayer(data, numPlayer):
@@ -40,6 +43,24 @@ def choosePlayer(data, numPlayer):
 			# Aller vers le fruit le plus proche de manière safe
 	
 			
+	def chooseQuarter(data, numPlayer):
+		thisPlayer = data[D_TEAMS][myTeamNum][T_PLAYERS][numPlayer]
+		
+		if thisPlayer[2] == M_NUT:    # Si le quater a une chataigne
 			
+			if ennemyAligned(thisPlayer[0], thisPlayer[1]):
+				# On lui lance dessus
+			elif baseEnnemyAligned(thisPlayer[0], thisPlayer[1]):
+				# On lui lance dessus
+			else:
+				# Se deplacer vers ennemi le plus proche
+				
+		elif thisPlayer[2] != P_EMPTY:
+			return choosePlayer(data, numPlayer)
+		
+		else:
+			# va chercher la chataigne la plus prochye
+			
+		
 		
 	
