@@ -17,11 +17,15 @@ def choosePlayer(data, numPlayer):
 		
 		if not positionIsDangerous(data, thisPlayer[0], thisPlayer[1]):    # Si le joueur n'est pas sur une pos dangereuse
 			
-			if case = canThrowInBase(data, numPlayer):
-				m = getPathToCoord(
+			case = canThrowInBase(data, numPlayer)
+			if case:
+				path = getPathToCoord(thisPlayer, case, data[D_MAP])
+				return "L" + getDirection(thisPlayer, path, data)
 			
-			elif canThrowToCloserPlayer(data, numPlayer):
-				# Lancer au joueur plus pres
+			case = canThrowToCloserPlayer(data, numPlayer)
+			elif case:
+				path = getPathToCoord(thisPlayer, case, data[D_MAP])
+				return "L" + getDirection(thisPlayer, path, data)
 				
 			else:
 				
@@ -35,13 +39,14 @@ def choosePlayer(data, numPlayer):
 		if not positionIsDangerous(data, thisPlayer[0], thisPlayer[1]):
 			
 			if isOnFruit(data, numPlayer):
-				# le ramasser
+				return "P"
 		
-		elif fruitInMajorityNotFar():
+		# elif fruitInMajorityNotFar():
 			# y aller de manière non dangereuse
 			
 		else:
-			# Aller vers le fruit le plus proche de manière safe
+			case = getNearestFruit((thisPlayer[0], thisPlayer[1]), getFruits(data[D_MAP]))
+			
 	
 			
 	def chooseQuarter(data, numPlayer):
