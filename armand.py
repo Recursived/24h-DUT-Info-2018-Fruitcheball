@@ -43,12 +43,12 @@ def canThrowToCloserPlayer(data, numP):
 
 	for free in freePlayers:
 		if free[0] == pos[0] and (-4 < free[1] - pos[1] < 4):
-			return True
+			return free[:2]
 			# if closerThanMe(data, free, pos):
 			# 	return free
 			return (free)
 		if free[1] == pos[1] and (-4 < free[0] - pos[0] < 4):
-			return True
+			return free[2:]
 			# if closerThanMe(data, free, pos):
 			# 	return free
 	return False
