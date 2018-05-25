@@ -11,4 +11,6 @@ def findQuarterbacksWithNuts(data):
 			lst.append((quarter[0], quarter[1]))
 	return lst
 
-def haveFruit(data, )
+def haveFruit(data, numP):
+	""" Renvoie si le joueur a un fruit """
+	return data[D_TEAMS][data[D_NUM_T]][T_PLAYERS][numP] != P_EMPTY
