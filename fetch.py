@@ -18,6 +18,7 @@ class Fetch(object):
 
 
 	def fetchMessage(self, message):
+		print(message)
 		# On décompose La trame en données
 		lst = message.split("_")
 
@@ -37,13 +38,15 @@ class Fetch(object):
 			for i in range(size):
 				self.data[D_TEAMS][i][T_PLAYERS] = [[0, 0, P_EMPTY] for i in range(3)]
 				self.data[D_TEAMS][i][T_FRUITS] = [0, 0, 0, 0, 0]
-				self.data[D_TEAMS][i][T_ZONE] = None
+				self.data[D_TEAMS][i][T_ZONE] = ()
 				self.data[D_TEAMS][i][T_SCORE] = 0
 
 			# On initialise la matrice en fonction de sa taille
 			self.mat = [None for i in range(width)]
 			self.mat = [list(self.mat) for i in range(height)]
 			self.data[D_MAP] = self.mat
+
+			self.initPlayer = [False, False, False, False]
 
 		# on récupère les lignes de la carte (on retire ses dimensions)
 		grid = lst[2].split(",")[1:]
@@ -63,6 +66,7 @@ class Fetch(object):
 			i += 1
 
 		for playerLine in range(3, len(lst)):
+			print(lst[playerLine])
 			player = playerLine - 3
 			bigLine = lst[playerLine].split(",")
 			
@@ -79,7 +83,7 @@ class Fetch(object):
 				self.data[D_TEAMS][player][T_PLAYERS][i] = [int(coord[1]), int(coord[2]), hold]
 				i += 1
 
-			if not self.written:
+			if not self.initPlayer[player]:
 				print("passing in zone")
 				coords = [0, 0, 0, 0, 0, 0]
 				i = 0
@@ -89,9 +93,10 @@ class Fetch(object):
 					coords[i+1] = int(coord[2])
 					i += 2
 				print(((coords[0], coords[1]), (coords[2], coords[3]), (coords[4], coords[5])))
+				print(player)
 				self.data[D_TEAMS][player][T_ZONE] = ((coords[0], coords[1]), (coords[2], coords[3]), (coords[4], coords[5]))
 
-				self.written = True
+				self.initPlayer[player] = True
 
 			self.data[D_TEAMS][player][T_SCORE] = int(bigLine[10])
 

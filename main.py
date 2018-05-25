@@ -32,7 +32,7 @@ def main():
 			break
 		data = dataFetching.fetchMessage(received)
 		
-		message = alea()
+		message = getReturnString(data)
 
 		# message = getReturnString(data)
 		print(message)
