@@ -93,9 +93,6 @@ def getPathToCoord(player, fruit, struct):
 def getDirection(player, path, data):
 	"""Get direction to go from player to nearest fruit"""
 	pos1 = (player[0],player[1])
-	#~ fruit = getNearestFruit(pos1,fruits)
-	#~ print(fruit)
-	#~ fruits.remove(fruit)
 	pos2 = path[0]
 	if pos1[0] == pos2[0]:
 		if pos1[1] > pos2[1]:
@@ -109,17 +106,19 @@ def getDirection(player, path, data):
 def getChoice(player,fruits, data):
 	
 	pos = (player[0],player[1])
-	print(pos,fruits)
+	team = data[D_TEAMS][data[D_NUM_T]]
+	print(team)
 	if player[2]: #si tient quelque chose
-		if pos in playdata[D_TEAMS][T_ZONE]: #si dans sa zone
+		if pos in team[T_ZONE]: #si dans sa zone
 			return "P"  #lache le fruit
 		#retourne à la base
-		return getDirection(player,getPathToCoord(player,playdata[D_TEAMS][T_ZONE][1],playdata[D_MAP]),data) #rentre à la base
-	#~ if data[D_MAP][pos[0]][pos[1]] and (0 <= data[D_MAP][pos[0]][pos[1]] < 4): #si sur un fruit
-	if pos in fruits:
+		return getDirection(player,getPathToCoord(player,data[D_TEAMS][T_ZONE][1],data[D_MAP]),data) #rentre à la base
+	if data[D_MAP][pos[1]][pos[0]] and (0 <= data[D_MAP][pos[1]][pos[0]] < 4): #si sur un fruit
 		return "P" #prend le fruit
 	fruit = getNearestFruit(pos,fruits) #sinon va vers fruit le plus proche
 	fruits.remove(fruit)
+	print("fruit:")
+	print(fruit)
 	return getDirection(player, getPathToCoord(player, fruit, data[D_MAP]), data)
 	
 	
