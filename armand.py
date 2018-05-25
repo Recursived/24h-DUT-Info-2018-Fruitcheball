@@ -16,4 +16,17 @@ def haveFruit(data, numP):
 	return data[D_TEAMS][data[D_NUM_T]][T_PLAYERS][numP] != P_EMPTY
 
 def canThrowInBase(data, numP):
-	
+	""" Teste si le joueur peut lancer dans la base """
+	player = data[D_NUM_T]
+	zone = data[D_TEAMS][player][T_ZONE]
+	pos = data[D_TEAMS][player][T_PLAYERS][numP]
+
+	for case in zone:
+		if case[0] == pos[0] and (-4 < case[1] - pos[1] < 4):
+			return True
+		if case[1] == pos[1] and (-4 < case[0] - pos[0] < 4):
+			return True
+	return False
+
+def canThrowToCloserPlayer(data, numP):
+	""" 
