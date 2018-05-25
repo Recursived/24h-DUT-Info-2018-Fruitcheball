@@ -129,7 +129,7 @@ def getEnemies(data):
 				enemies.append((j,i))
 	return enemies
 
-def getNuts(data, i, j):
+def getNuts(data):
 	struct = data[D_MAP]
 	nuts = []
 	height = len(struct)
