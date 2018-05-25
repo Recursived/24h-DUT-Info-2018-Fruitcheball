@@ -76,7 +76,7 @@ class Fetch(object):
 				else:
 					hold = int(coord[3])
 
-				self.data[D_TEAMS][player][T_PLAYERS][i] = [int(coord[2]), int(coord[1]), hold]
+				self.data[D_TEAMS][player][T_PLAYERS][i] = [int(coord[1]), int(coord[2]), hold]
 				i += 1
 
 			if not self.written:
