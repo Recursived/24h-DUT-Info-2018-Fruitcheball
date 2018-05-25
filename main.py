@@ -7,6 +7,7 @@ import sys
 from constants import *
 from network import *
 from fetch import *
+from direction import *
 
 # Fonctions -------------------------------------------------------------------
 def main():
@@ -30,7 +31,8 @@ def main():
 			break
 		data = dataFetching.fetchMessage(received)
 		
-		#~ message = choixIA()
+		message = getReturnString(data)
+		print(message)
 		connexion.send(message)
 
 
