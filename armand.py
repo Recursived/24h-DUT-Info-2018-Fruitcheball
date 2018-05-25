@@ -81,4 +81,39 @@ def canMoveOn(data, i, j, numP):
 			numA += 1
 		numT += 1
 	return False
-	
+
+def enemyBaseAligned(data, i, j):
+	"""  """
+	zone = []
+	pos = (i, j)
+	i = 0
+	for team in data[D_TEAMS]:
+		if i == data[D_NUM_T]:
+			continue
+		for enemy in team[i][T_PLAYERS]:
+			zone.append(enemy[:2])
+
+	for case in zones:
+		if case[0] == pos[0] and (-4 < case[1] - pos[1] < 4):
+			return (case)
+		if case[1] == pos[1] and (-4 < case[0] - pos[0] < 4):
+			return (case)
+	return False
+
+def enemyAligned(data, i, j):
+	"""  """
+	zone = []
+	pos = (i, j)
+	i = 0
+	for team in data[D_TEAMS]:
+		if i == data[D_NUM_T]:
+			continue
+		for enemy in team[i][T_ZONE]:
+			zone.append(enemy[:2])
+
+	for case in zones:
+		if case[0] == pos[0] and (-4 < case[1] - pos[1] < 4):
+			return (case)
+		if case[1] == pos[1] and (-4 < case[0] - pos[0] < 4):
+			return (case)
+	return False
