@@ -3,25 +3,24 @@
 # IA codee par l equipe ascii_p<array>
 
 # Imports ---------------------------------------------------------------------
-#import os
 import sys
-from constant import *
+from constants import *
 from network import *
 from format import *
 
 # Fonctions -------------------------------------------------------------------
 def main():
-	print(len(sys.argv))
-	if len(sys.argv) = 2:
+	if len(sys.argv) == 2:
 		ip = sys.argv[1]
 		connexion = Network(ip)
-	elif len(sys.argv) = 3:
+	elif len(sys.argv) == 3:
 		ip = sys.argv[1]
 		port = sys.argv[2]
 		connexion = Network(ip, port)
 	else:
-		connexion()
-	
+		connexion = Network
+
+	data = connexion.receive()
 
 
 if __name__ == '__main__':
