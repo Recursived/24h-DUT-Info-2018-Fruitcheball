@@ -1,6 +1,7 @@
 from constants import *
 
 def findQuarterbacksWithNuts(data):
+	""" Renvoie la position des quarterbacks avec une noix """
 	lst = []
 	for i in range(len(data[D_TEAMS])):
 		if i == data[D_NUM_T]:
