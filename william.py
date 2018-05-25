@@ -1,8 +1,9 @@
 from constants import *
 from maneta import *
+from direction
 from armand import *
 
-
+def throwInBase
 
 def choosePlayer(data, numPlayer):
 	
@@ -10,14 +11,14 @@ def choosePlayer(data, numPlayer):
 	thisPlayer = data[D_TEAMS][myTeamNum][T_PLAYERS][numPlayer]
 	thisPlayerCoords = (thisPlayer[0], thisPlayer[1])
 	
-	notToGo = getDangerousCoordsList(data, thisPlayer[0], thisPlayer[1])
+	notToGo = getNeighboursDangerous(data, thisPlayer[0], thisPlayer[1])
 	
 	if thisPlayer[2] != P_EMPTY:    # Si le joueur a un fruit sur lui
 		
 		if not positionIsDangerous(data, thisPlayer[0], thisPlayer[1]):    # Si le joueur n'est pas sur une pos dangereuse
 			
-			if canThrowInBase(data, numPlayer):
-				# Lancer dans la base
+			if case = canThrowInBase(data, numPlayer):
+				m = getPathToCoord(
 			
 			elif canThrowToCloserPlayer(data, numPlayer):
 				# Lancer au joueur plus pres
