@@ -27,6 +27,15 @@ def main():
 	data = connexion.receive()
 	print(dataFetching.fetchMessage(data))
 
+	while 1:
+		data = connexion.receive()
+		if data == "FIN":
+			break
+
+		dataFetching = Fetch(numero)
+		# message = choixIA()
+		connexion.send(message)
+
 
 if __name__ == '__main__':
     main()
