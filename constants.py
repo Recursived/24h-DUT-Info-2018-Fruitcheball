@@ -21,3 +21,6 @@ T_FRUITS = "fruits"                 # Clé correspondant à la liste de quantit�
 T_ZONE = "zone"                     # Clé correspondant au tuple contenant les tuples de coord des cases de la zone de l'équipe
 T_SCORE = "score"                   # Clé correspondant au score de l'équipe
 
+############# Constantes de possession du joueur ###############
+
+P_EMPTY = None
