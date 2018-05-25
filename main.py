@@ -34,6 +34,17 @@ def main():
 		
 		message = getReturnString(data)
 
+		m = str()
+		for i in range(3):
+			if i == 0:
+				m += chooseQuarter(data, i)
+			else:
+				m += choosePlayer(data, i)
+			if i != 2:
+				m += "-"
+			else:
+				m += "\n"
+
 		# message = getReturnString(data)
 		print(message)
 		connexion.send(message)
