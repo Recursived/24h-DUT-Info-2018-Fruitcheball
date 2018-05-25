@@ -7,11 +7,8 @@ import sys
 from constants import *
 from network import *
 from fetch import *
-<<<<<<< HEAD
 from choiceAlea import alea
-=======
 from direction import *
->>>>>>> b070147c914c2f7fe7498ead78d37aa83e2bc551
 
 # Fonctions -------------------------------------------------------------------
 def main():
@@ -35,12 +32,10 @@ def main():
 			break
 		data = dataFetching.fetchMessage(received)
 		
-<<<<<<< HEAD
 		message = alea()
-=======
-		message = getReturnString(data)
+
+		# message = getReturnString(data)
 		print(message)
->>>>>>> b070147c914c2f7fe7498ead78d37aa83e2bc551
 		connexion.send(message)
 
 
