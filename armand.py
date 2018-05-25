@@ -14,3 +14,6 @@ def findQuarterbacksWithNuts(data):
 def haveFruit(data, numP):
 	""" Renvoie si le joueur a un fruit """
 	return data[D_TEAMS][data[D_NUM_T]][T_PLAYERS][numP] != P_EMPTY
+
+def canThrowInBase(data, numP):
+	
