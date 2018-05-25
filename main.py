@@ -5,17 +5,23 @@
 # Imports ---------------------------------------------------------------------
 #import os
 import sys
+from constant import *
 from network import *
+from format import *
 
 # Fonctions -------------------------------------------------------------------
 def main():
 	print(len(sys.argv))
-	ip = sys.argv[1]
-	if len(sys.argv) > 2:
+	if len(sys.argv) = 2:
+		ip = sys.argv[1]
+		connexion = Network(ip)
+	elif len(sys.argv) = 3:
+		ip = sys.argv[1]
 		port = sys.argv[2]
+		connexion = Network(ip, port)
 	else:
-		port = 1337
-	connexion = Network(ip, port)
+		connexion()
+	
 
 
 if __name__ == '__main__':
