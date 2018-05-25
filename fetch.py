@@ -2,6 +2,7 @@ from constants import *
 
 class Fetch(object):
 	""" Objet de conversion des données envoyées du serveur """
+	
 	def __init__(self, ident):
 		pass
 		
@@ -17,12 +18,13 @@ class Fetch(object):
 
 
 	def fetchMessage(self, message):
-		# On décompose 
+		# On décompose La trame en données
 		lst = message.split("_")
-		for line in lst:
-			print(line)
-		self.data[D_NUM_TURN] = lst[0]
 
+		# On actualise le tour actuel
+		self.data[D_NUM_TURN] = int(lst[0])
+
+		# Si pas encore entierement initialisée
 		if not self.written:
 			size = int(lst[1])
 			width, height = lst[2].split(",")[0].split(":")
@@ -31,19 +33,23 @@ class Fetch(object):
 
 			self.data[D_TEAMS] = [dict() for i in range(size)]
 
+			# On définit les entrées du dictionnaire ne fontion du nombre de joeurs
 			for i in range(size):
 				self.data[D_TEAMS][i][T_PLAYERS] = [[0, 0, P_EMPTY] for i in range(3)]
 				self.data[D_TEAMS][i][T_FRUITS] = [0, 0, 0, 0, 0]
 				self.data[D_TEAMS][i][T_ZONE] = None
 				self.data[D_TEAMS][i][T_SCORE] = 0
 
+			# On initialise la matrice en fonction de sa taille
 			self.mat = [None for i in range(width)]
 			self.mat = [list(self.mat) for i in range(height)]
 			self.data[D_MAP] = self.mat
 
+		# on récupère les lignes de la carte (on retire ses dimensions)
 		grid = lst[2].split(",")[1:]
 		i = 0
 		for line in grid:
+			# On découpe les cases une a une
 			cases = list(line)
 			j = 0
 			for case in cases:
@@ -59,7 +65,8 @@ class Fetch(object):
 		for playerLine in range(3, len(lst)):
 			player = playerLine - 3
 			bigLine = lst[playerLine].split(",")
-
+			
+			# On définit les coordonnées des joueurs
 			i = 0
 			for coord in range(2, 5):
 				coord = bigLine[coord].split(":")
@@ -68,6 +75,7 @@ class Fetch(object):
 					hold = P_EMPTY
 				else:
 					hold = int(coord[3])
+
 				self.data[D_TEAMS][player][T_PLAYERS][i] = [int(coord[1]), int(coord[2]), hold]
 				i += 1
 
