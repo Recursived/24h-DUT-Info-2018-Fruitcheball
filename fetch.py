@@ -15,10 +15,9 @@ class Fetch(object):
 		self.data[D_NUM_T] = int(ident)
 		self.data[D_NUM_TURN] = 0
 
-		# Intitialisation des dictionnaires uniques à chaque joueur
-
 
 	def fetchMessage(self, message):
+		# On décompose 
 		lst = message.split("_")
 		for line in lst:
 			print(line)
