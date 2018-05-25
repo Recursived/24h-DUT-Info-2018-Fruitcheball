@@ -3,7 +3,6 @@ from maneta import *
 from direction
 from armand import *
 
-def throwInBase
 
 def choosePlayer(data, numPlayer):
 	
@@ -29,10 +28,15 @@ def choosePlayer(data, numPlayer):
 				
 			else:
 				
-				# Se deplacer vers la base de manière non dangereuse
+				case = data[D_TEAMS][myTeamNum][T_ZONE][0]
+				path = getPathToCoord(thisPlayer, case, data[D_MAP])
+				return getDirection(thisPlayer, path, data)
 				
 		else:   # Si la position ou il est dangereuse
-			# Bouger obligatoirement de manière non dangereuse vers la base
+			case = data[D_TEAMS][myTeamNum][T_ZONE][0]
+			path = getPathToCoord(thisPlayer, case, data[D_MAP])
+			return getDirection(thisPlayer, path, data)
+			
 			
 	else:   # Si le joueur n'a pas de fruits sur lui
 		
@@ -46,6 +50,8 @@ def choosePlayer(data, numPlayer):
 			
 		else:
 			case = getNearestFruit((thisPlayer[0], thisPlayer[1]), getFruits(data[D_MAP]))
+			path = getPathToCoord(thisPlayer, case, data[D_MAP])
+			return getDirection(thisPlayer, path, data)
 			
 	
 			
@@ -54,18 +60,29 @@ def choosePlayer(data, numPlayer):
 		
 		if thisPlayer[2] == M_NUT:    # Si le quater a une chataigne
 			
-			if ennemyAligned(thisPlayer[0], thisPlayer[1]):
-				# On lui lance dessus
-			elif baseEnnemyAligned(thisPlayer[0], thisPlayer[1]):
-				# On lui lance dessus
+			case = enemyAligned(data, thisPlayer[0], thisPlayer[1])
+			if case:
+				path = getPathToCoord(thisPlayer, case, data[D_MAP])
+				return "L" + getDirection(thisPlayer, path, data)
+			
+			case = enemyBaseAligned(data, thisPlayer[0], thisPlayer[1]):
+			elif case:
+				path = getPathToCoord(thisPlayer, case, data[D_MAP])
+				return "L" + getDirection(thisPlayer, path, data)
+				
 			else:
-				# Se deplacer vers ennemi le plus proche
+				case = getNearestFruit((thisPlayer[0], thisPlayer[1]), getEnemies(data))
+				path = getPathToCoord(thisPlayer, case, data[D_MAP])
+				return getDirection(thisPlayer, path, data)
+				
 				
 		elif thisPlayer[2] != P_EMPTY:
 			return choosePlayer(data, numPlayer)
 		
 		else:
-			# va chercher la chataigne la plus prochye
+			case = getNearestFruit((thisPlayer[0], thisPlayer[1]), getNuts(data))
+			path = getPathToCoord(thisPlayer, case, data[D_MAP])
+			return getDirection(thisPlayer, path, data)
 			
 		
 		
