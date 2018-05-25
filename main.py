@@ -25,6 +25,7 @@ def main():
 	connexion.send("ascii_p<array>\n")
 	numero = connexion.receive()
 	dataFetching = Fetch(numero)
+	lst = []
 
 	while 1:
 		received = connexion.receive()
@@ -32,21 +33,18 @@ def main():
 			break
 		data = dataFetching.fetchMessage(received)
 		
+		
+		
 		message = getReturnString(data)
-
-		m = str()
-		for i in range(3):
-			if i == 0:
-				m += chooseQuarter(data, i)
-			else:
-				m += choosePlayer(data, i)
-			if i != 2:
-				m += "-"
-			else:
-				m += "\n"
-
+		lst.append(data[D_TEAMS][data[D_NUM_T]][T_PLAYERS])
+		if len(lst) > 2:
+			lst.pop(0)
+		
+		if len(lst) == 2:
+			if lst[0] == lst[1]:
+				message = alea()
+		
 		# message = getReturnString(data)
-		print(message)
 		connexion.send(message)
 
 

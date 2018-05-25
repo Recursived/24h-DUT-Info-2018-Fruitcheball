@@ -42,7 +42,7 @@ def getAllPlayersCoords(data):
 	return playersCoords
 
 
-def shortestWay(graph, start, objective):
+def shortestWay(graph, start, objective, playersCoords):
 	#Initialization
 	closedList = []
 	openList = []
@@ -54,6 +54,9 @@ def shortestWay(graph, start, objective):
 			return buildWay(start,objective)
 		for v in getNeighboors(graph,u):
 			if (v in closedList) or ((v in openList) and v[2]<u[2]+1) or (v[4]==-1): continue # or (v[4]==-1) #rajouter collision joueur
+			if ((v[1],v[0]) in playersCoords) :
+				print("oulala")
+				continue
 			v[4] = u #Setting parent to u
 			v[2] = u[2]+1 #Updating cost
 			v[3] = v[2]+distanceToNode(u,v) #Updating heuristic
@@ -93,17 +96,15 @@ def getNearestFruit(pos, fruits):
 		dist[fruit] = abs(fruit[0]-pos[0]) + abs(fruit[1]-pos[1])
 	return sorted(dist, key=lambda fruit: dist[fruit])[0]
 	
-def getPathToCoord(player, fruit, struct):
+def getPathToCoord(player, fruit, struct,playersCoords):
 	graph = initializeGraph(struct)
 	playerNode = graph[player[1]][player[0]]
 	fruitNode = graph[fruit[0]][fruit[1]]
-	return shortestWay(graph,playerNode,fruitNode)
+	return shortestWay(graph,playerNode,fruitNode,playersCoords)
 	
 def getDirection(player, path, data):
 	"""Get direction to go from player to nearest fruit"""
 	pos1 = (player[1],player[0])
-	if not path:
-		return "X"
 	pos2 = path[0]
 	if pos1[0] == pos2[0]:
 		if pos1[1] > pos2[1]:
@@ -114,28 +115,30 @@ def getDirection(player, path, data):
 	return "S"
 	
 	
-def getChoice(player,fruits, data):
+def getChoice(player,fruits, data, playersCoords):
 	
 	pos = (player[1],player[0])
 	team = data[D_TEAMS][data[D_NUM_T]]
+	playersCoords.remove((player[0],player[1]))
 	if player[2]: #si tient quelque chose
 		if (player[0],player[1]) in team[T_ZONE]: #si dans sa zone
 			return "P"  #lache le fruit
 		#retourne à la base
-		return getDirection(player,getPathToCoord(player,(team[T_ZONE][1][1],team[T_ZONE][1][0]),data[D_MAP]),data) #rentre à la base
+		return getDirection(player,getPathToCoord(player,(team[T_ZONE][1][1],team[T_ZONE][1][0]),data[D_MAP],playersCoords),data) #rentre à la base
 	if data[D_MAP][pos[0]][pos[1]] and (0 <= data[D_MAP][pos[0]][pos[1]] < 4): #si sur un fruit
 		return "P" #prend le fruit
 	fruit = getNearestFruit(pos,fruits) #sinon va vers fruit le plus proche
 	fruits.remove(fruit)
-	return getDirection(player, getPathToCoord(player, fruit, data[D_MAP]), data)
+	return getDirection(player, getPathToCoord(player, fruit, data[D_MAP],data), data)
 	
 	
 
 def getReturnString(data):
 	team = data[D_TEAMS][data[D_NUM_T]]
+	playersCoords = getAllPlayersCoords(data)
 	fruits = getFruits(data[D_MAP])
 	players = team[T_PLAYERS]
-	return getChoice(players[0],fruits,data)+"-"+getChoice(players[1],fruits,data)+"-"+getChoice(players[2],fruits,data)+"\n"
+	return getChoice(players[0],fruits,data,playersCoords)+"-"+getChoice(players[1],fruits,data,playersCoords)+"-"+getChoice(players[2],fruits,data, playersCoords)+"\n"
 		
 	
 

@@ -1,11 +1,11 @@
-***
+﻿***
 Groupe : ascii_p<array>
 Langage utilisé : Python 3
 
 ***
 - lancement par défaut (en localhost et port 1337):
 
-python3 main.py 
+python3 main.py [ip]
 
 ***
 - lancement avec options (ip puis port)

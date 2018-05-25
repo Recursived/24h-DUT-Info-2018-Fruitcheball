@@ -18,7 +18,6 @@ class Fetch(object):
 
 
 	def fetchMessage(self, message):
-		print(message)
 		# On décompose La trame en données
 		lst = message.split("_")
 
@@ -66,7 +65,6 @@ class Fetch(object):
 			i += 1
 
 		for playerLine in range(3, len(lst)):
-			print(lst[playerLine])
 			player = playerLine - 3
 			bigLine = lst[playerLine].split(",")
 			
@@ -84,7 +82,6 @@ class Fetch(object):
 				i += 1
 
 			if not self.initPlayer[player]:
-				print("passing in zone")
 				coords = [0, 0, 0, 0, 0, 0]
 				i = 0
 				for coord in range(6, 9):
@@ -92,8 +89,6 @@ class Fetch(object):
 					coords[i] = int(coord[1])
 					coords[i+1] = int(coord[2])
 					i += 2
-				print(((coords[0], coords[1]), (coords[2], coords[3]), (coords[4], coords[5])))
-				print(player)
 				self.data[D_TEAMS][player][T_ZONE] = ((coords[0], coords[1]), (coords[2], coords[3]), (coords[4], coords[5]))
 
 				self.initPlayer[player] = True
