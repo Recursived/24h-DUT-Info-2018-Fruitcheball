@@ -74,7 +74,7 @@ def getFruits(struct):
 	width = len(struct[0])	
 	for j in range(height):
 		for i in range(width):
-			if struct[j][i] and struct[j][i] >= 0:
+			if struct[j][i] and 0 <= struct[j][i] < 4:
 				fruits.append((j,i))
 	return fruits
 
@@ -84,7 +84,7 @@ def getNearestFruit(pos, fruits):
 		dist[fruit] = abs(fruit[0]-pos[0]) + abs(fruit[1]-pos[1])
 	return sorted(dist, key=lambda fruit: dist[fruit])[0]
 	
-def getPathToFruit(player, fruit, struct):
+def getPathToCoord(player, fruit, struct):
 	graph = initializeGraph(struct)
 	playerNode = graph[player[0]][player[1]]
 	fruitNode = graph[fruit[0]][fruit[1]]
@@ -108,7 +108,12 @@ def getDirection(player, fruits, data):
 	
 	
 def getChoice(player,fruits, data):
-	pass #to-do
+	#go to base
+	if 0 <= data[D_MAP][player[0]][player[1]] < 4:
+		return "P"
+	return getDirection(player, fruits, data)
+	
+	
 
 def getReturnString(data):
 	team = data[D_TEAMS][data[D_NUM_T]]
