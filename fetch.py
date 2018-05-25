@@ -2,7 +2,7 @@ from constants import *
 
 class Fetch(object):
 	""" Objet de conversion des données envoyées du serveur """
-
+	
 	def __init__(self, ident):
 		pass
 		
@@ -18,6 +18,7 @@ class Fetch(object):
 
 
 	def fetchMessage(self, message):
+		print(message)
 		# On décompose La trame en données
 		lst = message.split("_")
 
@@ -37,7 +38,7 @@ class Fetch(object):
 			for i in range(size):
 				self.data[D_TEAMS][i][T_PLAYERS] = [[0, 0, P_EMPTY] for i in range(3)]
 				self.data[D_TEAMS][i][T_FRUITS] = [0, 0, 0, 0, 0]
-				self.data[D_TEAMS][i][T_ZONE] = None
+				self.data[D_TEAMS][i][T_ZONE] = ()
 				self.data[D_TEAMS][i][T_SCORE] = 0
 
 			# On initialise la matrice en fonction de sa taille
@@ -89,6 +90,7 @@ class Fetch(object):
 					coords[i+1] = int(coord[2])
 					i += 2
 				print(((coords[0], coords[1]), (coords[2], coords[3]), (coords[4], coords[5])))
+				print(player)
 				self.data[D_TEAMS][player][T_ZONE] = ((coords[0], coords[1]), (coords[2], coords[3]), (coords[4], coords[5]))
 
 				self.written = True
