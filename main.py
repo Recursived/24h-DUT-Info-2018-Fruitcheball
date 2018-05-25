@@ -24,16 +24,13 @@ def main():
 	numero = connexion.receive()
 	dataFetching = Fetch(numero)
 
-	data = connexion.receive()
-	print(dataFetching.fetchMessage(data))
-
 	while 1:
-		data = connexion.receive()
-		if data == "FIN":
+		received = connexion.receive()
+		if received == "FIN":
 			break
-
-		dataFetching = Fetch(numero)
-		# message = choixIA()
+		data = dataFetching.fetchMessage(received)
+		
+		#~ message = choixIA()
 		connexion.send(message)
 
 
