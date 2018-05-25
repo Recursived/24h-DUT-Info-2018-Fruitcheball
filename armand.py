@@ -117,3 +117,25 @@ def enemyAligned(data, i, j):
 		if case[1] == pos[1] and (-4 < case[0] - pos[0] < 4):
 			return (case)
 	return False
+
+def getEnemies(data):
+	struct = data[D_MAP]
+	enemies = []
+	height = len(struct)
+	width = len(struct[0])	
+	for j in range(height):
+		for i in range(width):
+			if struct[j][i] and 0 <= struct[j][i] < 4:
+				enemies.append((j,i))
+	return enemies
+
+def getNuts(data, i, j):
+	struct = data[D_MAP]
+	nuts = []
+	height = len(struct)
+	width = len(struct[0])	
+	for j in range(height):
+		for i in range(width):
+			if struct[j][i] and struct[j][i] == 4:
+				nuts.append((j,i))
+	return nuts
